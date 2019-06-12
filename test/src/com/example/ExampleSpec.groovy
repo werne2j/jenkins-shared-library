@@ -22,6 +22,6 @@ class ExampleSpec extends JenkinsPipelineSpecification {
     then:
       0 * getPipelineMock("sh")(_)
     expect:
-      output == "Command not executed"
+      output == "Should not execute"
   }
 }
