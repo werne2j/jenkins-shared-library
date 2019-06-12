@@ -1,6 +1,6 @@
 import com.example.Example
 
-def call() {
+def call(execute) {
   Example example = new Example()
-  example.execute()
+  example.execute(execute)
 }

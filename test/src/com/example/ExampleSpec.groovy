@@ -1,20 +1,27 @@
 import com.homeaway.devtools.jenkins.testing.JenkinsPipelineSpecification
-
 import com.example.Example
 
 class ExampleSpec extends JenkinsPipelineSpecification {
-    def example = null
+  def example = null
 
-    def setup() {
-        example = new Example()
+  def setup() {
+    example = new Example()
+    explicitlyMockPipelineVariable("out")
+  }
 
-        explicitlyMockPipelineVariable("out")
-    }
+  def "[ExampleSpec] will execute" () {
+    when:
+      example.execute()
+    then:
+      1 * getPipelineMock("sh")("command")
+  }
 
-    def "[GetAllRuns] will get all runs" () {
-        when:
-            example.execute()
-        then:
-            1 * getPipelineMock("sh")("command")
-    }
+  def "[ExampleSpec] will not execute" () {
+    when:
+      def output = example.execute(false)
+    then:
+      0 * getPipelineMock("sh")(_)
+    expect:
+      output == "Command not executed"
+  }
 }
