@@ -1,13 +1,15 @@
 node {
-  checkout scm
+  docker.image('maven:3-alpine').inside('-v $HOME/.m2:/root/.m2') {
+    checkout scm
 
-  stage('Unit Tests') {
-    sh 'mvn clean test'
-  }
+    stage('Unit Tests') {
+      sh 'mvn clean test'
+    }
 
-  stage('SonarQube analysis') {
-    withSonarQubeEnv('My SonarQube Server') {
-      sh 'mvn sonar:sonar'
+    stage('SonarQube analysis') {
+      withSonarQubeEnv('My SonarQube Server') {
+        sh 'mvn sonar:sonar'
+      }
     }
   }
 }
