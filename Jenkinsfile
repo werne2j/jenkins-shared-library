@@ -1,5 +1,5 @@
 node {
-  docker.image('maven:3-alpine').inside('-v $HOME/.m2:/root/.m2') {
+  withMaven {
     checkout scm
 
     stage('Unit Tests') {
