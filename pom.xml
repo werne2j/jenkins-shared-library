@@ -39,7 +39,7 @@
 
     <test.pattern>**/*Spec</test.pattern>
 
-    <sonar.projectKey>example project</sonar.projectKey>
+    <sonar.projectKey>example</sonar.projectKey>
     <sonar.sources>src,vars</sonar.sources>
     <sonar.tests>test</sonar.tests>
   </properties>
