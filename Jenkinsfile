@@ -1,15 +1,13 @@
 node {
-  withMaven {
-    checkout scm
+  checkout scm
 
-    stage('Unit Tests') {
-      sh 'mvn clean test'
-    }
+  stage('Unit Tests') {
+    sh 'mvn clean test'
+  }
 
-    stage('SonarQube analysis') {
-      withSonarQubeEnv('My SonarQube Server') {
-        sh 'mvn sonar:sonar'
-      }
+  stage('SonarQube analysis') {
+    withSonarQubeEnv('My SonarQube Server') {
+      sh 'mvn sonar:sonar'
     }
   }
 }
