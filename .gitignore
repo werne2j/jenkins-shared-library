@@ -1,0 +1,5 @@
+# Compiled groovy and reports
+target/
+
+# Jenkins data
+jenkins/
