@@ -1,4 +1,4 @@
-def call(Map config=[:], Closure body) {
+def call(Map config=[:], Closure body={}) {
     node {
         git url: "https://github.com/werne2j/sample-nodejs"
 
