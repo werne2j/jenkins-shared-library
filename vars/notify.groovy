@@ -1,12 +1,6 @@
-import org.example.Constants
+import org.example.Notify
 
 def call(Map config=[:]) {
-    def type = config.type
-    if (type == "slack") {
-        echo Constants.SLACK_MESSAGE
-        echo config.message
-    } else {
-        echo Constants.EMAIL_MESSAGE
-        echo config.message
-    }
+    def notify = new Notify()
+    notify.exec(config)
 }

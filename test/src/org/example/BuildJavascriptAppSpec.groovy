@@ -1,22 +1,23 @@
 import com.homeaway.devtools.jenkins.testing.JenkinsPipelineSpecification
+import org.example.BuildJavascriptApp
 
 class BuildJavascriptAppSpec extends JenkinsPipelineSpecification {
     def buildJavascriptApp = null
 
     def setup() {
-        buildJavascriptApp = loadPipelineScriptForTest("vars/buildJavascriptApp.groovy")
+        buildJavascriptApp = new BuildJavascriptApp()
     }
 
     def "[buildJavascriptApp] will run npm publish if deploy is true"() {
         when:
-            buildJavascriptApp deploy: true
+            buildJavascriptApp.exec(deploy: true)
         then:
             1 * getPipelineMock("sh")("npm publish")
     }
 
     def "[buildJavascriptApp] will not npm publish if deploy is false"() {
         when:
-            buildJavascriptApp deploy: false
+            buildJavascriptApp.exec(deploy: false)
         then:
             0 * getPipelineMock("sh")("npm publish")
     }
@@ -25,7 +26,7 @@ class BuildJavascriptAppSpec extends JenkinsPipelineSpecification {
         setup:
             def body = Mock(Closure)
         when:
-            buildJavascriptApp deploy: false, body
+            buildJavascriptApp.exec(deploy: false, body)
         then:
             1 * body()
     }
